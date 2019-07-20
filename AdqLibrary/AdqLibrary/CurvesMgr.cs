@@ -55,6 +55,16 @@ namespace AdqLibrary
         }
 
         /// <summary>
+        /// Gets a given Curve saved in disk
+        /// </summary>
+        /// <param name="idCurve">Curve's Identification</param>
+        /// <returns>a Curve instance</returns>
+        public Curve GetCurve(int idCurve)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
         /// Saves Current Curve into a bin file
         /// </summary>
         /// <returns>True if the process was successfully completed</returns>

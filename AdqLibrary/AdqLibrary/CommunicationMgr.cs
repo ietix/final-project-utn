@@ -64,6 +64,17 @@ namespace AdqLibrary
             }
         }
 
+        /// <summary>
+        /// Gets Unix TimeStamp Millisecond
+        /// </summary>
+        public long UnixTimeMS 
+        { 
+            get
+            {
+                return (long)((DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalMilliseconds); 
+            } 
+        }
+
         #endregion
 
         #region Constructors
@@ -117,7 +128,10 @@ namespace AdqLibrary
         /// </summary>
         public void StartAdquisition()
         {
-            throw new NotImplementedException();
+            if (_serialPort == null)
+                InitSerialPort();
+
+            _serialPort.DataReceived += _serialPort_DataReceived;
         }
 
         /// <summary>
@@ -125,7 +139,8 @@ namespace AdqLibrary
         /// </summary>
         public void StopAdquisition()
         {
-            throw new NotImplementedException();
+            if (_serialPort != null)
+                _serialPort.DataReceived -= _serialPort_DataReceived;
         }
 
         #endregion
@@ -208,11 +223,62 @@ namespace AdqLibrary
         }
 
         /// <summary>
-        /// Acquires point from flied and publishe them into a MsQueue
+        /// Sends message to MQueue
         /// </summary>
-        private void AcquirePoints()
+        /// <param name="idMensaje">Id Message DB</param>
+        /// <param name="type"Type - MODEL_STAT, PRE_AGC_DOWNLOAD, WIN_EQP_ROLL, etc></param>
+        /// <param name="idMaterial">Id Material if necessary, otherwise -99</param>
+        /// <param name="description">Message Type Description</param>
+        private void SendPointToMqueue(Point point)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _log.Info(string.Format("{0} ==> Encolo nuevo punto adquirido. TimeStamp [{1}] - Value [{2}]", MethodBase.GetCurrentMethod().Name, point.TimeStamp, point.Value));
+                _adquisitionQueue.Send(point);
+            }
+            catch (MessageQueueException ex)
+            {
+                if (ex.MessageQueueErrorCode == MessageQueueErrorCode.AccessDenied)
+                {
+                    _log.Error(string.Format("{0} ==> ERROR: Acceso denegado a la cola [{1}]", MethodBase.GetCurrentMethod().Name, Constants.MQueue));
+                }
+                _log.Error(string.Format("{0} ==> ERROR Codigo: [{1}], Error Msg: [{2}]", MethodBase.GetCurrentMethod().Name, ex.ErrorCode, ex.Message));
+            }
+        }
+
+        /// <summary>
+        /// Event Handler for serial data receiving
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Event Args</param>
+        private void _serialPort_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
+        {
+            string line = _serialPort.ReadLine();
+            ThreadPool.QueueUserWorkItem(new WaitCallback(AcquirePoint), new object[] { line });
+        }
+
+        /// <summary>
+        /// Acquires point from flied and 
+        /// publish them into a MsQueue
+        /// </summary>
+        /// <param name="valuePoint">Object that represents a Value acquired from field</param>
+        private void AcquirePoint(object valuePoint)
+        {
+            _readerWriteLockSlim.EnterWriteLock();
+
+            try
+            {
+                Point point = new Point() { TimeStamp = this.UnixTimeMS, Value = Convert.ToDouble(valuePoint) };
+                SendPointToMqueue(point);
+            }
+            catch (Exception ex)
+            {
+                _log.Error(string.Format("{0} ==> ERROR adquiriendo Punto de Curva. Error [{1}]", MethodBase.GetCurrentMethod().Name, ex.Message));
+            }
+            finally
+            {
+                _readerWriteLockSlim.ExitWriteLock();
+            }
         }
 
         #endregion

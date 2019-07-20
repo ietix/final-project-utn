@@ -29,11 +29,16 @@ namespace AdqLibrary
         /// <summary>
         /// Msg Queue where points acquired are saved in online mode
         /// </summary>
-        public static string MQueue = "";
+        public static string MQueue = "real_time_curve";
 
         /// <summary>
         /// Msg Queue's label where points acquired are saved in online mode
         /// </summary>
-        public static string MQueueLabel = "";
+        public static string MQueueLabel = "Real Time Curve";
+
+        /// <summary>
+        /// Base path where bin files are saved
+        /// </summary>
+        public static string BasePath = "";
     }
 }
