@@ -1,4 +1,5 @@
-﻿using log4net;
+﻿using AdqLibrary.Classes;
+using log4net;
 using System;
 using System.Collections.Generic;
 using System.IO.Ports;
@@ -39,7 +40,10 @@ namespace AdqLibrary
         /// Initializes a new instance of the <see cref="CommunicationMgr"/> class
         /// </summary>
         public CommunicationMgr()
-        { }
+        {
+            // Inits Serial Port
+            InitSerialPort();
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CommunicationMgr"/> class
@@ -70,6 +74,22 @@ namespace AdqLibrary
             return _communicationMgr;
         }
 
+        /// <summary>
+        /// Starts adquisition from field through serial port
+        /// </summary>
+        public void StartAdquisition()
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Stops adquisition from field through serial port
+        /// </summary>
+        public void StopAdquisition()
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
 
         #region Private Methods
@@ -79,7 +99,26 @@ namespace AdqLibrary
         /// </summary>
         private void InitSerialPort()
         {
-            _serialPort = new SerialPort("COM3", 9600, Parity.None, 8, StopBits.One);
+            // Port Instance
+            _serialPort = new SerialPort();
+
+            // Initialization
+            _serialPort.PortName = Constants.PortName;
+            _serialPort.BaudRate = Constants.BaudRate;
+            _serialPort.Parity = Parity.None;
+            _serialPort.DataBits = Constants.DataBits;
+            _serialPort.StopBits = StopBits.None;
+
+            _log.Info(string.Format("{0} ==> Se inicializa Puerto Serie con los siguientes parametros: PortName [{1}] - BaudRate [{2}] - Parity [{3}] - DataBits [{4}] - StopBits [{5}]", 
+                _serialPort.PortName, _serialPort.BaudRate, _serialPort.BaudRate, ((Parity)_serialPort.Parity).ToString(), _serialPort.DataBits, ((StopBits)_serialPort.StopBits).ToString()));
+        }
+
+        /// <summary>
+        /// Acquires point from flied and publishe them into a MsQueue
+        /// </summary>
+        private void AcquirePoints()
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

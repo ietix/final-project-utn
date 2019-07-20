@@ -43,7 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Curve.cs" />
+    <Compile Include="Classes\Point.cs" />
     <Compile Include="CommunicationMgr.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="CurvesMgr.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
