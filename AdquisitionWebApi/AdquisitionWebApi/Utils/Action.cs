@@ -5,9 +5,9 @@ using System.Web;
 
 namespace AdquisitionWebApi.Utils
 {
-  public class Actions
+  public class Action
   {
-    enum AdquisitionActions
+    enum AdquisitionAction
     {
       START,
       STOP

@@ -1,15 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+﻿using AdqLibrary;
+using AdqLibrary.Classes;
+using Newtonsoft.Json;
+using System;
+using System.IO;
 using System.Net.Http;
 using System.Web.Http;
-using AdqLibrary;
+using AdquisitionWebApi.Utils;
 
 namespace AdquisitionWebApi.Controllers
 {
   public class AdquisitionController : ApiController
   {
+    /// <summary>
+    /// Gets a stream of ValuePoint class
+    /// </summary>
+    /// <returns>A stream of ValuePoint class with online data comming from AdqLibrary</returns>
+    [HttpGet]
+    public HttpResponseMessage GetOnlineData()
+    {
+      var response = Request.CreateResponse();
+
+      response.Content = new PushStreamContent((stream, content, context) =>
+      {
+        foreach (var point in CommunicationMgr.GetInstance().AdquisitionMQueue.GetAllMessages())
+        {
+          var serializer = new JsonSerializer();
+
+          using (var writer = new StreamWriter(stream))
+          {
+            serializer.Serialize(writer, ((Point)point.Body).ToValuePoint());
+            stream.Flush();
+          }
+        }
+      });
+
+      return response;
+    }
+
     /// <summary>
     /// Starts or stops the adquisition
     /// Route: POST api/Adquisition?start=1
