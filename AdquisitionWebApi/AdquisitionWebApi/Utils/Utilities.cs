@@ -1,4 +1,6 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Linq;
+using System.Reflection;
 using AdqLibrary.Classes;
 
 namespace AdquisitionWebApi.Utils
@@ -18,6 +20,17 @@ namespace AdquisitionWebApi.Utils
       {
         TimeStamp = point.TimeStamp,
         Value = point.Value
+      };
+    }
+
+    public static Curve ToCurve(this ValuePoint[] points)
+    {
+      var pointList = points.ToList().Select(x => new Point { TimeStamp = x.TimeStamp, Value = x.Value }).ToList();
+
+      return new Curve
+      {
+        Id = Convert.ToInt32(DateTime.Now.ToString("yyyyMMddHHmmss")),
+        Points = pointList
       };
     }
 

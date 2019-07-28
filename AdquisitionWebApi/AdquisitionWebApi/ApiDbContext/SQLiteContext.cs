@@ -8,5 +8,6 @@ namespace AdquisitionWebApi.ApiDbContext
     public SQLiteContext() : base("name=AdqDb") { }
 
     public DbSet<Analysis> Analyses { get; set; }
+    public DbSet<Diagnostic> Diagnostics { get; set; }
   }
 }

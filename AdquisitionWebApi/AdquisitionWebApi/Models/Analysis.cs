@@ -38,6 +38,11 @@ namespace AdquisitionWebApi.Models
     [Column("DatafilePath")]
     public string FilePath { get; set; }
 
+    /// <summary>
+    /// Diagnostic linked to analysis
+    /// </summary>
+    public virtual Diagnostic Diagnostic { get; set; }
+
     #endregion
 
     #region Constructors

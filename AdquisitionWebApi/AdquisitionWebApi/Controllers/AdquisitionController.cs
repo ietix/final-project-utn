@@ -13,6 +13,7 @@ namespace AdquisitionWebApi.Controllers
   {
     /// <summary>
     /// Gets a stream of ValuePoint class
+    /// Route: POST api/Adquisition
     /// </summary>
     /// <returns>A stream of ValuePoint class with online data comming from AdqLibrary</returns>
     [HttpGet]
@@ -41,7 +42,7 @@ namespace AdquisitionWebApi.Controllers
     /// Starts or stops the adquisition
     /// Route: POST api/Adquisition?start=1
     /// </summary>
-    /// <param name="start"></param>
+    /// <param name="start">Paraameter with value=1 starts adquisition and value=0 stops it</param>
     /// <returns>Http 200 Ok when the action is completed</returns>
     public IHttpActionResult PostAdquisition([FromUri] int start)
     {
@@ -55,6 +56,26 @@ namespace AdquisitionWebApi.Controllers
         {
           CommunicationMgr.GetInstance().StartAdquisition();
         }
+
+        return Ok();
+      }
+      catch (Exception)
+      {
+
+        throw;
+      }
+    }
+
+    /// <summary>
+    /// Saves the current adquisition to a file
+    /// Route: POST api/Adquisition
+    /// </summary>
+    /// <returns>Http 200 Ok when the action is completed</returns>
+    public IHttpActionResult PostSave()
+    {
+      try
+      {
+        CurvesMgr.GetInstance().SaveCurveIntoBin();
 
         return Ok();
       }
