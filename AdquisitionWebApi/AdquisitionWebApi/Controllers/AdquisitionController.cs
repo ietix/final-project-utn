@@ -40,7 +40,7 @@ namespace AdquisitionWebApi.Controllers
 
     /// <summary>
     /// Starts or stops the adquisition
-    /// Route: POST api/Adquisition?start=1
+    /// Route: POST api/Adquisition/Adquisition?start=1
     /// </summary>
     /// <param name="start">Paraameter with value=1 starts adquisition and value=0 stops it</param>
     /// <returns>Http 200 Ok when the action is completed</returns>
@@ -68,7 +68,7 @@ namespace AdquisitionWebApi.Controllers
 
     /// <summary>
     /// Saves the current adquisition to a file
-    /// Route: POST api/Adquisition
+    /// Route: POST api/Adquisition/Save
     /// </summary>
     /// <returns>Http 200 Ok when the action is completed</returns>
     public IHttpActionResult PostSave()
