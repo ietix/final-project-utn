@@ -107,7 +107,8 @@ namespace AdqLibrary
 
             try
             {
-                curve.Id = result = Functions.TimeStampMS();
+                if (curve.Id <= 0)
+                    curve.Id = result = Functions.TimeStampMS();
 
                 //Create the stream to add object into it.
                 System.IO.Stream ms = File.OpenWrite(Constants.BasePath + curve.Id.ToString() + ".bin");
