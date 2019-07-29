@@ -128,6 +128,18 @@ namespace AdqLibrary
         }
 
         /// <summary>
+        /// Gets a single instance of CommunicationMgr
+        /// </summary>
+        /// <returns>an instance of CommunicationMgr</returns>
+        public static CommunicationMgr GetInstance(ILog log4NetInstance)
+        {
+            if (_communicationMgr == null)
+                _communicationMgr = new CommunicationMgr(log4NetInstance);
+
+            return _communicationMgr;
+        }
+
+        /// <summary>
         /// Starts adquisition from field through serial port
         /// </summary>
         public void StartAdquisition()
