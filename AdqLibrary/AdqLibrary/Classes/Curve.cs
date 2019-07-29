@@ -22,7 +22,7 @@ namespace AdqLibrary.Classes
         /// <summary>
         /// Gets or sets Curve's Identification
         /// </summary>
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         /// <summary>
         /// Gets or sets Point inside a  given Curve

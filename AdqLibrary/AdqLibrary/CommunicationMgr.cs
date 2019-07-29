@@ -65,14 +65,18 @@ namespace AdqLibrary
         }
 
         /// <summary>
-        /// Gets Unix TimeStamp Millisecond
+        /// Gets or sets log instance
         /// </summary>
-        public long UnixTimeMS 
-        { 
-            get
+        public static ILog Log
+        {
+            get 
             {
-                return (long)((DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalMilliseconds); 
-            } 
+                return _log;
+            }
+            set
+            {
+                _log = value;
+            }
         }
 
         #endregion
@@ -131,6 +135,10 @@ namespace AdqLibrary
             if (_serialPort == null)
                 InitSerialPort();
 
+            // Generate new current curve
+            CurvesMgr.GetInstance().CurveAcquired = new Curve() { Id = Functions.TimeStampMS() };
+            
+            // Activate DataReceived Event 
             _serialPort.DataReceived += _serialPort_DataReceived;
         }
 
@@ -139,6 +147,7 @@ namespace AdqLibrary
         /// </summary>
         public void StopAdquisition()
         {
+            // Deactivate DataReceived Event
             if (_serialPort != null)
                 _serialPort.DataReceived -= _serialPort_DataReceived;
         }
@@ -268,7 +277,7 @@ namespace AdqLibrary
 
             try
             {
-                Point point = new Point() { TimeStamp = this.UnixTimeMS, Value = Convert.ToDouble(valuePoint) };
+                Point point = new Point() { TimeStamp = Functions.TimeStampMS(), Value = Convert.ToDouble(valuePoint) };
                 SendPointToMqueue(point);
             }
             catch (Exception ex)
