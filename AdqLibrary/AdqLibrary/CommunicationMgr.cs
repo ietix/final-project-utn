@@ -169,7 +169,7 @@ namespace AdqLibrary
             _serialPort.BaudRate = Constants.BaudRate;
             _serialPort.Parity = Parity.None;
             _serialPort.DataBits = Constants.DataBits;
-            _serialPort.StopBits = StopBits.None;
+            _serialPort.StopBits = StopBits.One;
 
             _log.Info(string.Format("{0} ==> Se inicializa Puerto Serie con los siguientes parametros: PortName [{1}] - BaudRate [{2}] - Parity [{3}] - DataBits [{4}] - StopBits [{5}]", 
                 _serialPort.PortName, _serialPort.BaudRate, _serialPort.BaudRate, ((Parity)_serialPort.Parity).ToString(), _serialPort.DataBits, ((StopBits)_serialPort.StopBits).ToString()));
