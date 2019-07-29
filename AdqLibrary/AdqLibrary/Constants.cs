@@ -39,6 +39,6 @@ namespace AdqLibrary
         /// <summary>
         /// Base path where bin files are saved
         /// </summary>
-        public static string BasePath = "";
+        public static string BasePath = @"D:\";
     }
 }
