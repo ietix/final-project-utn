@@ -92,7 +92,7 @@ namespace AdqLibrary
             InitSerialPort();
 
             // Inits Msg Queue
-            InitMqueue(Constants.MQueue, Constants.MQueueLabel);
+            InitMqueue(string.Format(@".\Private$\{0}", Constants.MQueue), Constants.MQueueLabel);
         }
 
         /// <summary>
@@ -108,7 +108,7 @@ namespace AdqLibrary
             InitSerialPort();
 
             // Inits Msg Queue
-            InitMqueue(Constants.MQueue, Constants.MQueueLabel);
+            InitMqueue(string.Format(@".\Private$\{0}", Constants.MQueue), Constants.MQueueLabel);
         }
 
         #endregion
