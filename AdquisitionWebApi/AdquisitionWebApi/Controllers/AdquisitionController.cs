@@ -50,11 +50,11 @@ namespace AdquisitionWebApi.Controllers
       {
         if (start == 0)
         {
-          CommunicationMgr.GetInstance().StopAdquisition();
+          CommunicationMgr.GetInstance(Utilities.Log()).StopAdquisition();
         }
         else
         {
-          CommunicationMgr.GetInstance().StartAdquisition();
+          CommunicationMgr.GetInstance(Utilities.Log()).StartAdquisition();
         }
 
         return Ok();

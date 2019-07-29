@@ -2,11 +2,18 @@
 using System.Linq;
 using System.Reflection;
 using AdqLibrary.Classes;
+using log4net;
 
 namespace AdquisitionWebApi.Utils
 {
   public static class Utilities
   {
+    #region Private Fields
+
+    private static readonly ILog log = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
+    #endregion
+
     #region Public Methods
 
     /// <summary>
@@ -32,6 +39,15 @@ namespace AdquisitionWebApi.Utils
         Id = Convert.ToInt32(DateTime.Now.ToString("yyyyMMddHHmmss")),
         Points = pointList
       };
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    public static ILog Log()
+    {
+      return log;
     }
 
     #endregion
