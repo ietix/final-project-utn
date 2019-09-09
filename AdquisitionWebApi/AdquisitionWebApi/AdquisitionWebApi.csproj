@@ -204,6 +204,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Contact.cs" />
+    <Compile Include="Models\ContactType.cs" />
+    <Compile Include="Models\CarPerCustomer.cs" />
+    <Compile Include="Models\Brand.cs" />
+    <Compile Include="Models\Car.cs" />
+    <Compile Include="Models\CarModel.cs" />
+    <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Diagnostic.cs" />
     <Compile Include="Models\Analysis.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
