@@ -7,8 +7,8 @@
     <ProjectGuid>{E6F94EF2-F0C2-47F2-96CF-314B33A28D57}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>consoleTest</RootNamespace>
-    <AssemblyName>consoleTest</AssemblyName>
+    <RootNamespace>ConsoleTest</RootNamespace>
+    <AssemblyName>ConsoleTest</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
