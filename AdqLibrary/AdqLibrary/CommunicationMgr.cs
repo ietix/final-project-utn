@@ -1,6 +1,7 @@
 ﻿using AdqLibrary.Classes;
 using log4net;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO.Ports;
 using System.Linq;
@@ -147,6 +148,9 @@ namespace AdqLibrary
             if (_serialPort == null)
                 InitSerialPort();
 
+            // Open
+            _serialPort.Open();
+
             // Generate new current curve
             CurvesMgr.GetInstance().CurveAcquired = new Curve() { Id = Functions.TimeStampMS() };
             
@@ -161,7 +165,10 @@ namespace AdqLibrary
         {
             // Deactivate DataReceived Event
             if (_serialPort != null)
+            {
                 _serialPort.DataReceived -= _serialPort_DataReceived;
+                _serialPort.Close();
+            }
         }
 
         #endregion
@@ -183,8 +190,8 @@ namespace AdqLibrary
             _serialPort.DataBits = Constants.DataBits;
             _serialPort.StopBits = StopBits.One;
 
-            _log.Info(string.Format("{0} ==> Se inicializa Puerto Serie con los siguientes parametros: PortName [{1}] - BaudRate [{2}] - Parity [{3}] - DataBits [{4}] - StopBits [{5}]", 
-                _serialPort.PortName, _serialPort.BaudRate, _serialPort.BaudRate, ((Parity)_serialPort.Parity).ToString(), _serialPort.DataBits, ((StopBits)_serialPort.StopBits).ToString()));
+            _log.Info(string.Format("{0} ==> Se inicializa Puerto Serie con los siguientes parametros: PortName [{1}] - BaudRate [{2}] - Parity [{3}] - DataBits [{4}] - StopBits [{5}]",
+                MethodBase.GetCurrentMethod().Name, _serialPort.PortName, _serialPort.BaudRate, ((Parity)_serialPort.Parity).ToString(), _serialPort.DataBits, ((StopBits)_serialPort.StopBits).ToString()));
         }
 
         /// <summary>
@@ -282,15 +289,23 @@ namespace AdqLibrary
         /// Acquires point from flied and 
         /// publish them into a MsQueue
         /// </summary>
-        /// <param name="valuePoint">Object that represents a Value acquired from field</param>
-        private void AcquirePoint(object valuePoint)
+        /// <param name="rawValue">Object that represents a Value acquired from field</param>
+        private void AcquirePoint(object rawValue)
         {
             _readerWriteLockSlim.EnterWriteLock();
 
             try
             {
-                Point point = new Point() { TimeStamp = Functions.TimeStampMS(), Value = Convert.ToDouble(valuePoint) };
-                SendPointToMqueue(point);
+                if (rawValue != null)
+                {
+                    object valuePoint = Convert.ToString(((IEnumerable)rawValue).Cast<object>().First()).Replace("\r", "");
+
+                    Point point = new Point() { TimeStamp = Functions.TimeStampMS(), Value = Convert.ToDouble(valuePoint) };
+                    SendPointToMqueue(point);
+                }
+                else
+                    _log.Error(string.Format("{0} ==> ERROR adquiriendo Punto de Curva. Punto NULL", MethodBase.GetCurrentMethod().Name));
+                
             }
             catch (Exception ex)
             {
