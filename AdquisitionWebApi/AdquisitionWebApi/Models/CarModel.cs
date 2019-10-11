@@ -39,6 +39,8 @@ namespace AdquisitionWebApi.Models
     [Column("Description")]
     public string Description { get; set; }
 
+    public int BrandId { get; set; }
+
     /// <summary>
     /// Brand linked to CarModel
     /// </summary>

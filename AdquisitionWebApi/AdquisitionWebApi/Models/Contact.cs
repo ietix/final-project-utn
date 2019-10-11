@@ -33,10 +33,14 @@ namespace AdquisitionWebApi.Models
     [Column("Value")]
     public string Value { get; set; }
 
+    public int ContactTypeId { get; set; }
+
     /// <summary>
     /// ContactType linked to Contact
     /// </summary>
     public virtual ContactType ContactType { get; set; }
+
+    public int CustomerId { get; set; }
 
     /// <summary>
     /// Customer linked to Contact

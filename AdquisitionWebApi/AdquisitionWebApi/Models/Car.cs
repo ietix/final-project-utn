@@ -45,8 +45,10 @@ namespace AdquisitionWebApi.Models
     [Column("PlateNumber")]
     public string PlateNumber { get; set; }
 
+    public int CarModelId { get; set; }
+
     /// <summary>
-    /// Custom linked to CarModel
+    /// CarModel linked to Car
     /// </summary>
     public virtual CarModel CarModel { get; set; }
 
@@ -55,13 +57,19 @@ namespace AdquisitionWebApi.Models
     /// </summary>
     public virtual ICollection<CarPerCustomer> CarPerCustomers { get; set; }
 
+    /// <summary>
+    /// List of Diagnostic linked to each car
+    /// </summary>
+    public virtual ICollection<Diagnostic> Diagnostics { get; set; }
+
     #endregion
 
     #region Constructors
 
     public Car()
     {
-      this.CarPerCustomers = new HashSet<CarPerCustomer>();
+      this.CarPerCustomers = new List<CarPerCustomer>();
+      this.Diagnostics = new List<Diagnostic>();
     }
 
     #endregion

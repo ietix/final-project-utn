@@ -27,10 +27,14 @@ namespace AdquisitionWebApi.Models
     [Column("CarPerCustomerId")]
     public int Id { get; set; }
 
+    public int CarId { get; set; }
+
     /// <summary>
     /// Car linked to CarPerCustomer
     /// </summary>
     public virtual Car Car { get; set; }
+
+    public int CustomerId { get; set; }
 
     /// <summary>
     /// Customer linked to CarPerCustomer

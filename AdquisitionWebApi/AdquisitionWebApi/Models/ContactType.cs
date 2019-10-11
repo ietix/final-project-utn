@@ -52,7 +52,7 @@ namespace AdquisitionWebApi.Models
     /// </summary>
     public ContactType()
     {
-      this.Contacts = new HashSet<Contact>();
+      this.Contacts = new List<Contact>();
     }
 
     #endregion

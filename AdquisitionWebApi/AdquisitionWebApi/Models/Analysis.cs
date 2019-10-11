@@ -38,6 +38,8 @@ namespace AdquisitionWebApi.Models
     [Column("DatafilePath")]
     public string FilePath { get; set; }
 
+    public int DiagnosticId { get; set; }
+
     /// <summary>
     /// Diagnostic linked to analysis
     /// </summary>

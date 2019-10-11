@@ -46,6 +46,32 @@ namespace AdquisitionWebApi.Models
     public DateTime Date { get; set; }
 
     /// <summary>
+    /// Car linked to Diagnostic
+    /// </summary>
+    public virtual Car Car { get; set; }
+
+    public int CustomerId { get; set; }
+
+    /// <summary>
+    /// Customer linked to Diagnostic
+    /// </summary>
+    public virtual Customer Customer { get; set; }
+
+    public int DiagnosticTypeId { get; set; }
+
+    /// <summary>
+    /// DiagnosticType linked to Diagnostic
+    /// </summary>
+    public virtual DiagnosticType DiagnosticType { get; set; }
+
+    public int FailureTypeId { get; set; }
+
+    /// <summary>
+    /// FailureType linked to Diagnostic
+    /// </summary>
+    public virtual FailureType FailureType { get; set; }
+
+    /// <summary>
     /// List of analysis linked to each diagnostic
     /// </summary>
     public virtual ICollection<Analysis> Analyses { get; set; }
@@ -59,7 +85,7 @@ namespace AdquisitionWebApi.Models
     /// </summary>
     public Diagnostic()
     {
-      this.Analyses = new HashSet<Analysis>();
+      this.Analyses = new List<Analysis>();
     }
 
     #endregion
