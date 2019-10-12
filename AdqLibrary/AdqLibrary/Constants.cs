@@ -14,7 +14,7 @@ namespace AdqLibrary
         /// <summary>
         /// Port's Name
         /// </summary>
-        public static string PortName = "COM3";
+        public static string PortName = "COM6";
         
         /// <summary>
         /// Baud Rate

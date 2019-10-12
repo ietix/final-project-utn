@@ -1,0 +1,5 @@
+<p-sidebar [(visible)]="visibleSidebar1" [baseZIndex]="10000">
+  <p-panelMenu [model]="items" [style]="{'width':'300px'}"></p-panelMenu>
+  <button pButton type="button" (click)="visibleSidebar1 = false" label="Save" class="ui-button-success"></button>
+  <button pButton type="button" (click)="visibleSidebar1 = false" label="Cancel" class="ui-button-secondary"></button>
+</p-sidebar>
