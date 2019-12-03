@@ -7,7 +7,8 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { PanelModule } from 'primeng/panel';
 import { InputTextModule } from 'primeng/inputtext';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {ButtonModule} from 'primeng/button';
 //import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
@@ -21,8 +22,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
       AppRoutes, 
       PanelModule, 
       InputTextModule,
-      BrowserAnimationsModule/*,
-      NoopAnimationsModule*/
+      BrowserAnimationsModule,
+      ButtonModule
    ],
    providers: [],
    bootstrap: [

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {PanelModule} from 'primeng/panel';
-import {InputTextModule} from 'primeng/inputtext';
+// import {PanelModule} from 'primeng/panel';
+// import {InputTextModule} from 'primeng/inputtext';
+// import {ButtonModule} from 'primeng/button';
 
 
 @Component({
