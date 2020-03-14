@@ -42,7 +42,7 @@ namespace AdquisitionWebApi.Controllers
     /// Starts or stops the adquisition
     /// Route: POST api/Adquisition/Adquisition?start=1
     /// </summary>
-    /// <param name="start">Paraameter with value=1 starts adquisition and value=0 stops it</param>
+    /// <param name="start">Parameter with value=1 starts adquisition and value=0 stops it</param>
     /// <returns>Http 200 Ok when the action is completed</returns>
     public IHttpActionResult PostAdquisition([FromUri] int start)
     {

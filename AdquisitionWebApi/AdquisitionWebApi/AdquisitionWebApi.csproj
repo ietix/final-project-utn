@@ -208,6 +208,8 @@
     <Compile Include="Controllers\CarModelController.cs" />
     <Compile Include="Controllers\BrandController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\Login.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Models\FailureType.cs" />
     <Compile Include="Models\DiagnosticType.cs" />
@@ -224,6 +226,7 @@
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Diagnostic.cs" />
     <Compile Include="Models\Analysis.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\Action.cs" />
     <Compile Include="Utils\Utilities.cs" />
@@ -289,6 +292,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Helpers\" />
     <Folder Include="Views\Brand\" />
+    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
