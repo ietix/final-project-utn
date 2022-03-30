@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 
-namespace AdquisitionWebApi.Models
+namespace CombuScanModel
 {
   /// <summary>
-  /// Represents a ContactType entity
+  /// Represents a DiagnosticType entity
   /// </summary>
-  [Table("ContactType")]
-  public class ContactType
+  [Table("DiagnosticType")]
+  public class DiagnosticType
   {
     #region Private Fields
     #endregion
@@ -20,29 +16,29 @@ namespace AdquisitionWebApi.Models
     #region Public Properties
 
     /// <summary>
-    /// Id of ContactType class
+    /// Id of DiagnosticType class
     /// </summary>
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    [Column("ContactTypeId")]
+    [Column("DiagnosticTypeId")]
     public int Id { get; set; }
 
     /// <summary>
-    /// Name of ContactType
+    /// Name of DiagnosticType
     /// </summary>
     [Column("Name")]
     public string Name { get; set; }
 
     /// <summary>
-    /// Description of ContactType
+    /// Description of DiagnosticType
     /// </summary>
     [Column("Description")]
     public string Description { get; set; }
 
     /// <summary>
-    /// List of Contact linked to each ContactType
+    /// List of car models linked to each brand
     /// </summary>
-    public virtual ICollection<Contact> Contacts { get; set; }
+    public virtual ICollection<Diagnostic> Diagnostics { get; set; }
     #endregion
 
     #region Constructors
@@ -50,9 +46,9 @@ namespace AdquisitionWebApi.Models
     /// <summary>
     /// Class constructor
     /// </summary>
-    public ContactType()
+    public DiagnosticType()
     {
-      this.Contacts = new List<Contact>();
+      this.Diagnostics = new List<Diagnostic>();
     }
 
     #endregion

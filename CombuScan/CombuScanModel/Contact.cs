@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 
-namespace AdquisitionWebApi.Models
+namespace CombuScanModel
 {
   /// <summary>
-  /// Represents a carpercustomer entity
+  /// Represents a Contact entity
   /// </summary>
-  [Table("CarPerCustomer")]
-  public class CarPerCustomer
+  [Table("Contact")]
+  public class Contact
   {
     #region Private Fields
     #endregion
@@ -20,30 +16,36 @@ namespace AdquisitionWebApi.Models
     #region Public Properties
 
     /// <summary>
-    /// Id of carpercustomer class
+    /// Id of Contact class
     /// </summary>
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    [Column("CarPerCustomerId")]
+    [Column("BrandId")]
     public int Id { get; set; }
 
-    public int CarId { get; set; }
+    /// <summary>
+    /// Value of Contact
+    /// </summary>
+    [Column("Value")]
+    public string Value { get; set; }
+
+    public int ContactTypeId { get; set; }
 
     /// <summary>
-    /// Car linked to CarPerCustomer
+    /// ContactType linked to Contact
     /// </summary>
-    public virtual Car Car { get; set; }
+    public virtual ContactType ContactType { get; set; }
 
     public int CustomerId { get; set; }
 
     /// <summary>
-    /// Customer linked to CarPerCustomer
+    /// Customer linked to Contact
     /// </summary>
     public virtual Customer Customer { get; set; }
     #endregion
 
     #region Constructors
-
+    
     #endregion
 
     #region Public Methods
