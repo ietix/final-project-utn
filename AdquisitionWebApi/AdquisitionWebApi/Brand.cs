@@ -15,7 +15,7 @@ namespace AdquisitionWebApi.Models
   [Table("Brand")]
   public class Brand
   {
-    #region Private Fields
+    #region Private Fields 
     #endregion
 
     #region Public Properties
