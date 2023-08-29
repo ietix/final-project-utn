@@ -37,7 +37,7 @@ namespace CombuScanModel
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-      optionsBuilder.UseSqlite(config.GetConnectionString("CombuScan") ?? "DataSource=..\\DB\\AdqDb.db");
+      optionsBuilder.UseSqlite(config.GetConnectionString("CombuScan") ?? "DataSource=..\\DB\\AdqDb.db", null);
     }
 
     #endregion

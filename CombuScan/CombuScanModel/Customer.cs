@@ -8,7 +8,7 @@ namespace CombuScanModel
   /// Represents a customer entity
   /// </summary>
   [Table("Customer")]
-  public class Customer
+  public partial class Customer
   {
     #region Private Fields
     #endregion

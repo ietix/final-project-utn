@@ -7,34 +7,34 @@ namespace CombuScanApi.Controllers
 {
   [Route("api/[controller]")]
   [ApiController]
-  public class BrandController : ControllerBase
+  public class AnalysisController : ControllerBase
   {
     private readonly CombuScanDbContext _context;
 
-    public BrandController(CombuScanDbContext context)
+      public AnalysisController(CombuScanDbContext context)
     {
       _context = context;
     }
 
     // GET: api/Brand
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Brand>>> GetBrands()
+    public async Task<ActionResult<IEnumerable<Analysis>>> GetAnalyses()
     {
-      return await _context.Brands.ToListAsync();
+      return await _context.Analyses.ToListAsync();
     }
 
     // GET: api/Brand/5
     [HttpGet("{id}")]
-    public async Task<ActionResult<Brand>> GetBrand(int id)
+    public async Task<ActionResult<Analysis>> GetAnalysis(int id)
     {
-      var brand = await _context.Brands.FindAsync(id);
+      var analysis = await _context.Analyses.FindAsync(id);
 
-      if (brand == null)
+      if (analysis == null)
       {
         return NotFound();
       }
 
-      return Ok(brand);
+      return Ok(analysis);
     }
 
     // PUT: api/Brand/5
